@@ -1,4 +1,6 @@
 using BibliotecaApi.Application.Livros.Commands.CriarLivro;
+using BibliotecaApi.Application.Livros.Commands.AtualizarLivroById;
+using BibliotecaApi.Application.Livros.Commands.DeletarLivroById;
 using BibliotecaApi.Application.Livros.Queries.ObterLivroById;
 using BibliotecaApi.Application.Livros.Queries.ObterTodosLivros;
 using MediatR;
@@ -40,6 +42,23 @@ public class LivrosController : ControllerBase
         if (livro == null)
             return NotFound();
         return Ok(livro);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> AtualizarLivroById(int id, [FromBody] AtualizarLivroByIdCommand command)
+    {
+        command.Id = id;
+        var livro = await _mediator.Send(command);
+        return Ok(livro);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletarLivroById(int id)
+    {
+        var command = new DeletarLivroByIdCommand { Id = id };
+        await _mediator.Send(command);
+        return NoContent();
+
     }
   
 }
