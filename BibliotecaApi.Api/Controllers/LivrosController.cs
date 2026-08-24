@@ -58,7 +58,6 @@ public class LivrosController : ControllerBase
         var command = new DeletarLivroByIdCommand { Id = id };
         await _mediator.Send(command);
         return NoContent();
-
     }
   
 }

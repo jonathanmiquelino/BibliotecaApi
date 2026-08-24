@@ -14,7 +14,6 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data s
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(BibliotecaApi.Application.Livros.Commands.CriarLivro.CriarLivroCommand)
         .Assembly));
-
 var app = builder.Build();
 
 app.UseHttpsRedirection();
